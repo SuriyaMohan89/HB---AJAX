@@ -20,8 +20,8 @@ $('#get-fortune-button').on('click', showFortune);
 
 // PART 2: SHOW WEATHER
 
-function requestForecast(forecast){
-	let weather = (forecast['forecast']);
+function requestForecast(results){
+	let weather = (results['forecast']);
 	$('#weather-info').html(weather);
 }
 
@@ -44,12 +44,26 @@ $("#weather-form").on('submit', showWeather);
 
 // PART 3: ORDER MELONS
 
+
+function alertDelivery(result){
+	console.log(result);
+	$('#order-status').html(result['code'] +'\t '+result['msg']);
+}
+
 function orderMelons(evt) {
     evt.preventDefault();
 
     // TODO: show the result message after your form
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
-}
+    let formData = { 'qty': $('#qty-field').val(),
+    				 'melon_type' : $('#melon-type-field').val(), 
+
+    };
+
+    $.post("/order-melons.json",formData, alertDelivery);
+
+
+};
 
 $("#order-form").on('submit', orderMelons);
 

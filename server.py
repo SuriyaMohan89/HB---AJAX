@@ -41,7 +41,6 @@ def fortune():
 
     return random.choice(FORTUNES)
 
-
 @app.route('/weather.json')
 def weather():
     """Return a weather-info dictionary for this zipcode."""
